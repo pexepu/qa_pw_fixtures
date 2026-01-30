@@ -1,7 +1,7 @@
 import { test as base} from '@playwright/test';
 import { CreateArticlePage } from '../../src/ui/pages/article/CreateArticlePage';
 import { ViewArticlePage } from '../../src/ui/pages/article/ViewArticlePage';
-
+import { EditArticlePage } from '../../src/ui/pages/article/EditArticlePage';
 import { generateNewArticleData} from '../../src/common/testData/generateNewArticleData';
 
 export const test = base.extend<{
@@ -11,11 +11,16 @@ export const test = base.extend<{
   articleWithOneTag;
   articleWithTwoTags;
   createNewArticle;
+  editArticlePage;
 }>({
   createArticlePage: async({ page }, use) => {
     const createArticlePage = new CreateArticlePage(page);
 
     await use(createArticlePage);
+  },
+  editArticlePage: async ({ page }, use) => {
+  const editArticlePage = new EditArticlePage(page);
+  await use(editArticlePage);
   },
   viewArticlePage: async({ page }, use) => {
     const viewArticlePage = new ViewArticlePage(page);
